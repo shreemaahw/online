@@ -10,8 +10,22 @@
 
 <body>
 
-    <a href="https://wa.me/7980961274?text=I%20am%20interested%20in%20your%20services.%20How%20to%20get%20started%3F">I
-        am interested</a>
+    <textarea name="" id="userInput" cols="30" rows="10"></textarea>
+    <button onclick="prepareData()">Buy</button>
+    <!-- <a href="https://wa.me/7980961274?text=I%20am%20interested%20in%20your%20services.%20How%20to%20get%20started%3F">I
+        am interested</a> -->
+
+
+    <script>
+        function prepareData() {
+            userInput = document.getElementById('userInput').value;
+            const a = document.createElement('a');
+            a.href = `https://wa.me/7980961274?text=Subham%20Manna%0A${userInput}`;
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+        }
+    </script>
 </body>
 
 </html>
