@@ -24,14 +24,16 @@ class GroupContainer extends HTMLElement {
         if (this.groupContainer) {
             this.groupContainer.innerHTML = '';
             this._groupData.forEach(cardInfo => {
-                console.log(cardInfo)
                 const row = document.createElement('div');
                 row.classList.add('row');
                 const col = document.createElement('div');
-                col.classList.add('col', 'py-5');
+                col.classList.add('col', 'py-4', 'px-0');
                 const itemGroup = document.createElement('item-group');
                 itemGroup.addEventListener('initialized', () => {
                     itemGroup.itemData = cardInfo;
+                });
+                itemGroup.addEventListener('itemClicked', (event) => {
+                    this.dispatchEvent(new CustomEvent('itemClicked', { detail: event.detail }));
                 });
                 col.appendChild(itemGroup);
                 row.appendChild(col);

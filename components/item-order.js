@@ -1,4 +1,4 @@
-class ItemGroup extends HTMLElement {
+class ItemOrder extends HTMLElement {
     itemGroup
     set itemData(value) { this._itemData = value; this.render(); }
     get itemData() { return this._itemData; }
@@ -6,8 +6,15 @@ class ItemGroup extends HTMLElement {
 
     connectedCallback() {
         this.innerHTML = `
-        <h5 class="px-2 text-warning"><b class="item-group-title"></b></h5>
-        <div class="d-flex overflow-auto item-group">
+        <div class="row">
+            <div class="col d-flex justify-content-center">
+                <div>
+                    <h4>Shree Maa Hardwares</h4>
+                    <h6><i class="icofont-user-alt-7"></i> Sukumar Manna</h6>
+                    <h6><i class="icofont-phone"></i> + <i class="icofont-brand-whatsapp"></i> 9732838451</h6>
+                    <h6><i class="icofont-google-map"></i> Rathtala, Kakdwip, 24 PGS(s), 743347</h6>
+                </div>
+            </div>
         </div>
         `;
         this.itemGroup = this.getElementsByClassName('item-group')[0];
@@ -32,4 +39,4 @@ class ItemGroup extends HTMLElement {
     }
 }
 
-customElements.define('item-group', ItemGroup);
+customElements.define('item-order', ItemOrder);
