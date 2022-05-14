@@ -1,0 +1,136 @@
+[
+    {
+        "groupName": "শ্যাম স্টিল",
+        "itemList": [
+            {
+                "itemName": "শ্যামের পাতি",
+                "currentPrice": "98",
+                "lastPrice": "95",
+                "available": "200"
+            },
+            {
+                "itemName": "শ্যামের Z",
+                "currentPrice": "98",
+                "lastPrice": "95",
+                "available": "200"
+            },
+            {
+                "itemName": "শ্যামের এঙ্গেল",
+                "currentPrice": "98",
+                "lastPrice": "95",
+                "available": "200"
+            },
+            {
+                "itemName": "শ্যামের বার (7)",
+                "currentPrice": "98",
+                "lastPrice": "95",
+                "available": "200"
+            },
+            {
+                "itemName": "শ্যামের বার (10)",
+                "currentPrice": "98",
+                "lastPrice": "95",
+                "available": "200"
+            },
+            {
+                "itemName": "শ্যামের বার (12)",
+                "currentPrice": "98",
+                "lastPrice": "95",
+                "available": "200"
+            }
+        ]
+    },
+    {
+        "groupName": "SRMB স্টিল",
+        "itemList": [
+            {
+                "itemName": "SRMB পাতি",
+                "currentPrice": "96",
+                "lastPrice": "95",
+                "available": "300"
+            },
+            {
+                "itemName": "SRMB এঙ্গেল",
+                "currentPrice": "98",
+                "lastPrice": "95",
+                "available": "200"
+            },
+            {
+                "itemName": "SRMB পাতি",
+                "currentPrice": "96",
+                "lastPrice": "95",
+                "available": "300"
+            },
+            {
+                "itemName": "SRMB এঙ্গেল",
+                "currentPrice": "98",
+                "lastPrice": "95",
+                "available": "200"
+            },
+            {
+                "itemName": "SRMB পাতি",
+                "currentPrice": "96",
+                "lastPrice": "95",
+                "available": "300"
+            },
+            {
+                "itemName": "SRMB এঙ্গেল",
+                "currentPrice": "98",
+                "lastPrice": "95",
+                "available": "200"
+            }
+        ]
+    },
+    {
+        "groupName": "লোকাল স্টিল",
+        "itemList": [
+            {
+                "itemName": "লোকাল পাতি",
+                "currentPrice": "78",
+                "lastPrice": "73",
+                "available": "500"
+            },
+            {
+                "itemName": "লোকাল এঙ্গেল",
+                "currentPrice": "78",
+                "lastPrice": "73",
+                "available": "500"
+            },
+            {
+                "itemName": "লোকাল বার (7)",
+                "currentPrice": "78",
+                "lastPrice": "73",
+                "available": "500"
+            },
+            {
+                "itemName": "লোকাল Z",
+                "currentPrice": "78",
+                "lastPrice": "73",
+                "available": "500"
+            }
+        ]
+    },
+    {
+        "groupName": "অন্যান্য সামগ্রী",
+        "itemList": [
+            {
+                "itemName": "চ্যানেল",
+                "currentPrice": "87",
+                "lastPrice": "77",
+                "available": "150"
+            },
+            {
+                "itemName": "চ্যানেল",
+                "currentPrice": "87",
+                "lastPrice": "77",
+                "available": "150"
+            },
+            {
+                "itemName": "চ্যানেল",
+                "currentPrice": "87",
+                "lastPrice": "77",
+                "available": "150"
+            }
+        ]
+    }
+]
