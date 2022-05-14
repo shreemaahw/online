@@ -12,7 +12,7 @@
 })();
 
 (() => {
-    fetch('https://shreemaahw.github.io/online/data-file.json')
+    fetch(`https://shreemaahw.github.io/online/data-file.json?random=${Math.random()}`)
         .then(response => response.json())
         .then(data => {
             console.log(data)
