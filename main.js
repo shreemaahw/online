@@ -1,4 +1,17 @@
 (() => {
+    const groupContainer = document.getElementsByTagName('group-container')[0];
+    groupContainer.addEventListener('initialized', () => {
+        fetch(`https://shreemaahw.github.io/online/data-file.json?random=${Math.random()}`)
+            .then(response => response.json())
+            .then(data => {
+                console.log(data)
+                console.log(groupContainer)
+                groupContainer.groupData = data;
+            });
+    });
+})();
+
+(() => {
     [
         './components/app-carousel.js',
         './components/group-container.js',
@@ -9,17 +22,6 @@
         s.setAttribute('src', path);
         document.head.appendChild(s);
     });
-})();
-
-(() => {
-    fetch(`https://shreemaahw.github.io/online/data-file.json?random=${Math.random()}`)
-        .then(response => response.json())
-        .then(data => {
-            console.log(data)
-            const groupContainer = document.getElementsByTagName('group-container')[0];
-            console.log(groupContainer)
-            groupContainer.groupData = data;
-        });
 })();
 
 sendToWhatsapp = () => {
