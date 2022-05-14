@@ -13,27 +13,42 @@
 </head>
 
 <body>
-    <div class="container">
+    <div class="container group-container-page">
         <div class="row">
             <div class="col px-0">
                 <app-carousel></app-carousel>
             </div>
         </div>
         <div class="row sticky-top bg-light">
-            <div class="col d-flex">
-                <h3 class="d-flex justify-content-center w-100 py-3 m-0 shop-title">শ্রীমা হার্ডওয়্যার</h3>
-                <button class="btn ml-auto position-relative">
-                    <i class="icofont-cart-alt icofont-2x"></i>
-                    <span class="badge badge-primary position-absolute">9</span>
-                </button>
+            <div class="col bg-steel-5">
+                <app-header></app-header>
             </div>
         </div>
-        <div class="row">
+        <div class="row bg-steel-2">
             <div class="col">
                 <group-container></group-container>
             </div>
         </div>
-        <button onclick="sendToWhatsapp()">ORDER</button>
+
+        <div class="row error-message d-none">
+            <div class="col">
+                <div class="d-flex flex-column align-items-center justify-content-center">
+                    <div class="position-relative">
+                        <i class="icofont-ui-wifi icofont-3x text-primary"></i>
+                        <i class="icofont-close icofont-3x position-absolute text-danger" style="left: 0;"></i>
+                    </div>
+                    <p>No Internet!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container item-order-page d-none">
+        <div class="row">
+            <div class="col">
+                <item-order></item-order>
+
+            </div>
+        </div>
     </div>
 
     <script src="./library/jquery.js"></script>
