@@ -1,0 +1,14 @@
+.badge {
+    right: 12px;
+    top: 5px !important;
+}
+
+.shop-title {
+    color: white;
+    text-shadow: 2px 2px 3px #dc3545;
+}
+
+.small-item-card {
+    height: 100px;
+    width: 100px;
+}
