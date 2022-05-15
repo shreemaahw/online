@@ -3,40 +3,52 @@
         "groupName": "শ্যাম স্টিল",
         "itemList": [
             {
+                "itemId": "shyam_pati",
                 "itemName": "শ্যামের পাতি",
                 "currentPrice": "98",
                 "lastPrice": "95",
-                "available": "200"
+                "stock": "200",
+                "unit": "KG"
             },
             {
+                "itemId": "shyam_z",
                 "itemName": "শ্যামের Z",
                 "currentPrice": "98",
                 "lastPrice": "95",
-                "available": "200"
+                "stock": "200",
+                "unit": "KG"
             },
             {
+                "itemId": "shyam_angle",
                 "itemName": "শ্যামের এঙ্গেল",
                 "currentPrice": "98",
                 "lastPrice": "95",
-                "available": "200"
+                "stock": "200",
+                "unit": "KG"
             },
             {
+                "itemId": "shyam_bar_7",
                 "itemName": "শ্যামের বার (7)",
                 "currentPrice": "98",
                 "lastPrice": "95",
-                "available": "200"
+                "stock": "200",
+                "unit": "KG"
             },
             {
+                "itemId": "shyam_bar_10",
                 "itemName": "শ্যামের বার (10)",
                 "currentPrice": "98",
                 "lastPrice": "95",
-                "available": "2000"
+                "stock": "200",
+                "unit": "KG"
             },
             {
+                "itemId": "shyam_bar_12",
                 "itemName": "শ্যামের বার (12)",
                 "currentPrice": "98",
                 "lastPrice": "95",
-                "available": "200"
+                "stock": "200",
+                "unit": "KG"
             }
         ]
     },
@@ -44,40 +56,20 @@
         "groupName": "SRMB স্টিল",
         "itemList": [
             {
+                "itemId": "srmb_pati",
                 "itemName": "SRMB পাতি",
                 "currentPrice": "96",
                 "lastPrice": "95",
-                "available": "300"
+                "stock": "300",
+                "unit": "KG"
             },
             {
+                "itemId": "srmb_angle",
                 "itemName": "SRMB এঙ্গেল",
                 "currentPrice": "98",
                 "lastPrice": "95",
-                "available": "200"
-            },
-            {
-                "itemName": "SRMB পাতি",
-                "currentPrice": "96",
-                "lastPrice": "95",
-                "available": "300"
-            },
-            {
-                "itemName": "SRMB এঙ্গেল",
-                "currentPrice": "98",
-                "lastPrice": "95",
-                "available": "200"
-            },
-            {
-                "itemName": "SRMB পাতি",
-                "currentPrice": "96",
-                "lastPrice": "95",
-                "available": "300"
-            },
-            {
-                "itemName": "SRMB এঙ্গেল",
-                "currentPrice": "98",
-                "lastPrice": "95",
-                "available": "200"
+                "stock": "200",
+                "unit": "KG"
             }
         ]
     },
@@ -85,28 +77,36 @@
         "groupName": "লোকাল স্টিল",
         "itemList": [
             {
+                "itemId": "local_pati",
                 "itemName": "লোকাল পাতি",
                 "currentPrice": "78",
                 "lastPrice": "73",
-                "available": "500"
+                "stock": "500",
+                "unit": "KG"
             },
             {
+                "itemId": "local_angle",
                 "itemName": "লোকাল এঙ্গেল",
                 "currentPrice": "78",
                 "lastPrice": "73",
-                "available": "500"
+                "stock": "500",
+                "unit": "KG"
             },
             {
+                "itemId": "local_bar_7",
                 "itemName": "লোকাল বার (7)",
                 "currentPrice": "78",
                 "lastPrice": "73",
-                "available": "500"
+                "stock": "500",
+                "unit": "KG"
             },
             {
+                "itemId": "local_z",
                 "itemName": "লোকাল Z",
                 "currentPrice": "78",
                 "lastPrice": "73",
-                "available": "500"
+                "stock": "500",
+                "unit": "KG"
             }
         ]
     },
@@ -114,22 +114,12 @@
         "groupName": "অন্যান্য সামগ্রী",
         "itemList": [
             {
+                "itemId": "channel",
                 "itemName": "চ্যানেল",
                 "currentPrice": "87",
                 "lastPrice": "77",
-                "available": "150"
-            },
-            {
-                "itemName": "চ্যানেল",
-                "currentPrice": "87",
-                "lastPrice": "77",
-                "available": "150"
-            },
-            {
-                "itemName": "চ্যানেল",
-                "currentPrice": "87",
-                "lastPrice": "77",
-                "available": "150"
+                "stock": "150",
+                "unit": "KG"
             }
         ]
     }
