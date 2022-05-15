@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>শ্রীমা হার্ডওয়্যার</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./icons/icofont.min.css">
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+    <div class="container group-container-page d-none">
+        <div class="row">
+            <div class="col px-0">
+                <app-carousel></app-carousel>
+            </div>
+        </div>
+        <div class="row sticky-top bg-light">
+            <div class="col bg-steel-5">
+                <app-header></app-header>
+            </div>
+        </div>
+        <div class="row bg-steel-2">
+            <div class="col">
+                <group-container></group-container>
+            </div>
+        </div>
+
+        <div class="row error-message d-none">
+            <div class="col">
+                <div class="d-flex flex-column align-items-center justify-content-center">
+                    <div class="position-relative">
+                        <i class="icofont-ui-wifi icofont-3x text-primary"></i>
+                        <i class="icofont-close icofont-3x position-absolute text-danger" style="left: 0;"></i>
+                    </div>
+                    <p>No Internet!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container order-summary-page">
+        <div class="row">
+            <div class="col">
+                <order-page></order-page>
+            </div>
+        </div>
+    </div>
+
+    <script src="./library/jquery.js"></script>
+    <script src="./library/bootstrap.js"></script>
+    <script src="./main.js"></script>
+</body>
+
+</html>

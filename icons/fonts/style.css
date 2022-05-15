@@ -1,0 +1,81 @@
+html, body {
+    height: 100%;
+    width: 100%;
+}
+
+.badge {
+    right: 12px;
+    top: 5px !important;
+}
+
+.shop-title {
+    color: white;
+    text-shadow: 2px 2px 3px #dc3545;
+}
+
+.small-item-card {
+    height: 100px;
+    min-width: 100px;
+    padding: 0.75rem;
+    box-shadow: 1px 1px 3px 0px black;
+    text-shadow: 2px 2px 2px black;
+    background-color: #8c7b47!important;
+    background: repeating-linear-gradient(45deg, black, transparent 100px);
+}
+
+.old-price-style {
+    color: #8ec6ff;
+    text-decoration: line-through;
+}
+
+.spinner-grow {
+    top: 0;
+    left: 0;
+    height: 4rem;
+    width: 4rem;
+}
+
+.cart-button-container {
+    top: 0;
+    right: 0;
+}
+
+.item-group-title {
+    text-shadow: 2px 2px 5px black;
+}
+
+.opacity-50 {
+    opacity: 0.5;
+}
+
+.order-item.input-group {
+    flex-direction: column;
+}
+
+.order-item.input-group .input-group-text {
+    border-radius: 0.35rem;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.order-item.input-group .form-control {
+    border-radius: 0.35rem;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.bg-steel-1 {
+    background: url('./img/bg-steel-1.jpg');
+}
+.bg-steel-2 {
+    background: url('./img/bg-steel-2.jpg');
+}
+.bg-steel-3 {
+    background: url('./img/bg-steel-3.jpg');
+}
+.bg-steel-4 {
+    background: url('./img/bg-steel-4.jpg');
+}
+.bg-steel-5 {
+    background: url('./img/bg-steel-5.jpg');
+}
