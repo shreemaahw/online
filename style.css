@@ -59,9 +59,24 @@ html, body {
 }
 
 .order-item.input-group .form-control {
-    border-radius: 0.35rem;
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
+    border-top: 0;
+    border-radius: 0;
+    border-bottom-left-radius: 0.35rem;
+}
+
+.order-item.input-group .sub-total {
+    border-bottom-right-radius: 0.35rem;
+    display: flex;
+    align-items: center;
+}
+
+.order-button {
+    box-shadow: 1px 1px 5px black;
+}
+
+.required-error-message::placeholder {
+    color: red;
+    opacity: 1;
 }
 
 .bg-steel-1 {
