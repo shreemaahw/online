@@ -18,6 +18,7 @@ html, body {
     min-width: 100px;
     padding: 0.75rem;
     box-shadow: 1px 1px 3px 0px black;
+    text-shadow: 2px 2px 2px black;
     background-color: #8c7b47!important;
     background: repeating-linear-gradient(45deg, black, transparent 100px);
 }
@@ -45,6 +46,22 @@ html, body {
 
 .opacity-50 {
     opacity: 0.5;
+}
+
+.order-item.input-group {
+    flex-direction: column;
+}
+
+.order-item.input-group .input-group-text {
+    border-radius: 0.35rem;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.order-item.input-group .form-control {
+    border-radius: 0.35rem;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
 }
 
 .bg-steel-1 {
