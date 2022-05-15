@@ -82,7 +82,7 @@ class UserInfoCard extends HTMLElement {
 
         let text = userDetails['name'] + ' (' + userDetails['mobile'] + ') @' + userDetails['address'] + '%0A%0A';
         orderDetails.forEach(item => {
-            text = text + item['itemName'] + ' (' + item['itemId'] + ') ' + item['quantity'] + item['unit'];
+            text = text + item['itemName'] + ' (' + item['itemId'] + ') ' + item['quantity'] + item['unit'] + '%0A';
         });
 
         const a = document.createElement('a');
