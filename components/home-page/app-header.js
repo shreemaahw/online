@@ -1,10 +1,10 @@
 class AppHeader extends HTMLElement {
+    static get observedAttributes() {
+        return ['refreshstatus'];
+    }
     cart;
     badge;
     glower;
-    _selectedItemList = [];
-    set selectedItem(item) { this.toggleItem(item); }
-    get selectedItem() { return this._selectedItemList; }
     constructor() { super(); }
 
     connectedCallback() {
@@ -25,35 +25,39 @@ class AppHeader extends HTMLElement {
         this.badge = this.getElementsByClassName('badge')[0];
         this.glower = this.getElementsByClassName('spinner-grow')[0];
         this.dispatchEvent(new CustomEvent('initialized'));
-        this.getDataFromLocal();
-        this.updateBadge();
+        this.checkLocalStorage();
         this.getElementsByTagName('button')[0].addEventListener('click', () => {
-            showItemOrderRow();
+            this.showOrderPage();
         });
     }
 
-    toggleItem(item) {
-        const itemIndex = this.selectedItem.indexOf(item);
-        if (itemIndex > -1) {
-            this.selectedItem.splice(itemIndex, 1);
-        } else {
-            this.selectedItem.push(item);
+    attributeChangedCallback(name, oldValue, newValue) {
+        if (newValue === 'refresh') {
+            this.checkLocalStorage();
         }
-        this.storeDataInLocal();
-        this.updateBadge();
     }
 
-    getDataFromLocal() {
-        const data = localStorage.getItem('selectedItemsInCart');
-        data && (this._selectedItemList = JSON.parse(data));
+    showOrderPage = () => {
+        const homePage = document.body.getElementsByClassName('home-page')[0];
+        const orderPage = document.body.getElementsByClassName('order-page')[0];
+        homePage.classList.add('d-none');
+        orderPage.classList.remove('d-none');
+        document.body.getElementsByTagName('order-page')[0].setAttribute('showsection', 'order-summary-row');
+        document.body.getElementsByTagName('order-summary')[0].setAttribute('refreshstatus', 'refresh');
     }
 
-    storeDataInLocal() {
-        localStorage.setItem('selectedItemsInCart', JSON.stringify(this.selectedItem));
+    checkLocalStorage() {
+        let data = localStorage.getItem('selectedItemsInCart');
+        if (data) {
+            data = JSON.parse(data);
+            this.glowCart(data.length);
+        } else {
+            this.glowCart(0);
+        }
+        this.setAttribute('refreshstatus', 'refreshed');
     }
 
-    updateBadge() {
-        const totalSelectedItem = this.selectedItem.length;
+    glowCart(totalSelectedItem) {
         this.badge.innerText = totalSelectedItem;
         if (totalSelectedItem > 0) {
             this.cart.classList.remove('d-none');

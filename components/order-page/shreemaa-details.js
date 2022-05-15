@@ -23,8 +23,17 @@ class ShreemaaDetails extends HTMLElement {
         </div>
         `;
         this.getElementsByClassName('back-button')[0].addEventListener('click', () => {
-            showGroupContainerRow();
+            this.showHomePage();
         });
+    }
+
+    showHomePage = () => {
+        const homePage = document.body.getElementsByClassName('home-page')[0];
+        const orderPage = document.body.getElementsByClassName('order-page')[0];
+        homePage.classList.remove('d-none');
+        orderPage.classList.add('d-none');
+        document.body.getElementsByTagName('app-header')[0].setAttribute('refreshstatus', 'refresh');
+        document.body.getElementsByTagName('group-container')[0].setAttribute('refreshstatus', 'refresh');
     }
 }
 

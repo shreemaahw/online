@@ -18,8 +18,7 @@ class ItemCard extends HTMLElement {
                     <i class="icofont-rupee"></i><span class="current-price"></span>/-
                 </p>
                 <p class="shop-name d-flex justify-content-center mb-1 item-name text-nowrap">
-                    স্টক:
-                    <span class="item-stock"></span>KGs
+                    স্টক:<span class="pl-1 item-stock"></span>
                 </p>
             </div>
         </div>
@@ -31,17 +30,70 @@ class ItemCard extends HTMLElement {
         this.itemStockEle = this.getElementsByClassName('item-stock')[0];
         this.dispatchEvent(new CustomEvent('initialized'));
         this.addEventListener('click', () => {
-            this.itemCardEle.classList.toggle('opacity-50');
-            this.dispatchEvent(new CustomEvent('itemClicked', { detail: this.itemData }));
+            if (this.itemData.stock !== '0') {
+                this.toggleItemToLocal();
+                this.dispatchEvent(new CustomEvent('itemClicked'));
+            } else {
+                // this.getElementsByClassName('text-danger')[0].style.fontSize = '20px';
+            }
         });
     }
 
     render() {
         if (this.itemNameEle && this.currentPriceEle && this.oldPriceEle) {
-            this.itemNameEle.innerText = this._itemData.itemName;
-            this.currentPriceEle.innerText = this._itemData.currentPrice;
-            this.oldPriceEle.innerText = this._itemData.lastPrice;
-            this.itemStockEle.innerText = this._itemData.available;
+            this.itemNameEle.innerText = this.itemData.itemName;
+            this.currentPriceEle.innerText = this.itemData.currentPrice;
+            this.oldPriceEle.innerText = this.itemData.lastPrice;
+            if (this.itemData.stock !== '0') {
+                this.itemStockEle.innerText = this.itemData.stock + ' ' + this.itemData.unit;
+            } else {
+                this.itemStockEle.innerHTML = '<span class="text-danger">No stock</span>';
+            }
+            this.isItemInLocalStorage() ? this.itemCardEle.classList.add('opacity-50')
+                : this.itemCardEle.classList.remove('opacity-50');
+        }
+    }
+
+    isItemInLocalStorage() {
+        let selectedItemsInCart = localStorage.getItem('selectedItemsInCart');
+        if (selectedItemsInCart) {
+            selectedItemsInCart = JSON.parse(selectedItemsInCart);
+            for (let index = 0; index < selectedItemsInCart.length; index++) {
+                if (selectedItemsInCart[index]['itemId'] === this.itemData['itemId']) {
+                    return true;
+                }
+            }
+            return false;
+        } else {
+            return false;
+        }
+    }
+
+    toggleItemToLocal() {
+        let itemPoped = false;
+        let selectedItemsInCart = localStorage.getItem('selectedItemsInCart');
+        if (selectedItemsInCart) {
+            selectedItemsInCart = JSON.parse(selectedItemsInCart);
+            for (let index = 0; index < selectedItemsInCart.length; index++) {
+                if (selectedItemsInCart[index]['itemId'] === this.itemData['itemId']) {
+                    selectedItemsInCart.splice(index, 1);
+                    this.itemCardEle.classList.remove('opacity-50');
+                    itemPoped = true;
+                    break;
+                }
+            }
+            if (itemPoped) {
+                (selectedItemsInCart.length === 0) ?
+                    localStorage.removeItem('selectedItemsInCart') :
+                    localStorage.setItem('selectedItemsInCart', JSON.stringify(selectedItemsInCart));
+            } else {
+                selectedItemsInCart.push(this.itemData);
+                this.itemCardEle.classList.add('opacity-50');
+                localStorage.setItem('selectedItemsInCart', JSON.stringify(selectedItemsInCart));
+            }
+        } else {
+            this.itemCardEle.classList.add('opacity-50');
+            localStorage.setItem('selectedItemsInCart', JSON.stringify([this.itemData]));
         }
     }
 }

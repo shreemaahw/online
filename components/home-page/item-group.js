@@ -23,8 +23,8 @@ class ItemGroup extends HTMLElement {
                 itemCard.addEventListener('initialized', () => {
                     itemCard.itemData = cardInfo;
                 });
-                itemCard.addEventListener('itemClicked', (event) => {
-                    this.dispatchEvent(new CustomEvent('itemClicked', { detail: event.detail }));
+                itemCard.addEventListener('itemClicked', () => {
+                    this.dispatchEvent(new CustomEvent('itemClicked'));
                 });
                 this.itemGroup.appendChild(itemCard);
             });

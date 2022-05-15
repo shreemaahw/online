@@ -1,112 +1,154 @@
 class OrderSummary extends HTMLElement {
-    itemList
-    set itemList(value) { this._itemList = value; this.render(); }
-    get itemList() { return this._itemList; }
+    static get observedAttributes() {
+        return ['refreshstatus'];
+    }
+    _itemContainer;
+    _cardFooter;
+    _totalAmountEle;
+    _selectedItemsInCart;
     constructor() { super(); }
 
     connectedCallback() {
         this.innerHTML = `
         <div class="card">
-            <div class="card-header">
-                <h5> Order details </h5>
-            </div>
-            <div class="card-body">
-                <div class="order-item input-group mb-3">
-                    <div class="input-group-text w-100">
-                        <span>
-                            শ্যামের পাতি (Rs. 98.5/-)
-                        </span>
-                        <i class="icofont-close-line-squared-alt icofont-2x ml-auto"></i>
+            <div class="card-header"><h5>আইটেম ডিটেলস</h5></div>
+            <div class="card-body pb-0"></div>
+            <div class="card-footer py-0 d-none">
+                <div class="order-item input-group">
+                    <div class="d-flex w-100">
+                        <div class="w-50 d-flex justify-content-end pr-1"><b>Total</b></div>
+                        <div class="w-50"><b class="total-amount"></b></div>
                     </div>
-                    <input type="number" class="form-control w-100" placeholder="পরিমান">
-                </div>
-                <div class="order-item input-group mb-3">
-                    <div class="input-group-text w-100">
-                        <span>
-                            শ্যামের এঙ্গেল (Rs. 96/-)
-                        </span>
-                        <i class="icofont-close-line-squared-alt icofont-2x ml-auto"></i>
-                    </div>
-                    <input type="number" class="form-control w-100" placeholder="পরিমান">
-                </div>
-                <div class="order-item input-group mb-3">
-                    <div class="input-group-text w-100">
-                        <span>
-                            শ্যামের Z (Rs. 88/-)
-                        </span>
-                        <i class="icofont-close-line-squared-alt icofont-2x ml-auto"></i>
-                    </div>
-                    <input type="number" class="form-control w-100" placeholder="পরিমান">
                 </div>
             </div>
         </div>
         <div class="row my-4">
             <div class="col">
-                <button class="btn btn-primary btn-block d-flex justify-content-center align-items-center" style="box-shadow: 1px 1px 5px black;">
-                    <i class="icofont-whatsapp text-light icofont-2x"></i>
-                    হোয়াটস্ অ্যাপে অর্ডার করুন
-                    <i class="icofont-whatsapp text-light icofont-2x"></i>
-                </button>
+                <button class="order-button btn btn-primary btn-block">অর্ডার করুন</button>
             </div>
         </div>
         `;
+        this._itemContainer = this.getElementsByClassName('card-body')[0];
+        this._cardFooter = this.getElementsByClassName('card-footer')[0];
+        this._totalAmountEle = this.getElementsByClassName('total-amount')[0];
         this.getElementsByTagName('button')[0].addEventListener('click', () => {
-            // this.sendToWhatsapp();
+            this.isFormValid() && this.dispatchEvent(new CustomEvent('order'));
         });
+        this.render();
+    }
+
+    attributeChangedCallback(name, oldValue, newValue) {
+        if (newValue === 'refresh') { this.render(); }
     }
 
     render() {
-    }
+        this._itemContainer.innerHTML = '';
+        this._selectedItemsInCart = localStorage.getItem('selectedItemsInCart');
+        if (this._selectedItemsInCart) {
+            this._selectedItemsInCart = JSON.parse(this._selectedItemsInCart);
+            this._selectedItemsInCart.forEach((item, index) => {
+                const orderItem = this.getElement('div', 'order-item input-group mb-3');
+                const inputLabel = this.getElement('div', 'input-group-text w-100');
+                const itemName = this.getElement('span', '', item.itemName + ' (Rs. ' + item.currentPrice + '/' + item.unit + ')');
+                const cancelIcon = this.getElement('i', 'icofont-close-line-squared-alt icofont-2x ml-auto');
+                cancelIcon.addEventListener('click', () => {
+                    this.cancelSelectedItem(index);
+                });
+                const inputContainer = this.getElement('div', 'd-flex w-100');
+                const input = this.getElement('input', 'form-control border-right-0 w-50');
+                const subTotal = this.getElement('div', 'sub-total w-50 border-right border-bottom');
+                input.type = 'number';
+                input.placeholder = 'পরিমান';
 
-    // {
-    //     name: 'সুখেন্দু পড়ুয়া',
-    //     address: 'উকিলের বাজার',
-    //     mobile: '7798986540'
-    // }
-    getUserDetailsFormLocal() {
-        let userDetails = localStorage.getItem('userInfo');
-        if (userDetails) {
-            const missingInfo = [];
-            userDetails = JSON.parse(userDetails);
-            !userDetails['name'] && (missingInfo.push('name'));
-            !userDetails['mobile'] && (missingInfo.push('mobile'));
-            !userDetails['address'] && (missingInfo.push('address'));
-            if (missingInfo.length > 0) {
-                this.dispatchEvent(new CustomEvent('userDetailsError', { detail: missingInfo.toString() }));
-                return undefined;
-            } else {
-                return userDetails;
-            }
-        } else {
-            this.dispatchEvent(new CustomEvent('userDetailsError', { detail: 'name,mobile,address' }));
+                input.addEventListener('input', (e) => {
+                    this.calculatePrice(e.target, item.currentPrice);
+                });
+                input.addEventListener('blur', (e) => {
+                    this.saveInLocal(e.target.value, item);
+                    this.calculateTotalPrice();
+                });
+                inputLabel.appendChild(itemName);
+                inputLabel.appendChild(cancelIcon);
+                orderItem.appendChild(inputLabel);
+                inputContainer.appendChild(input);
+                inputContainer.appendChild(subTotal);
+                orderItem.appendChild(inputContainer);
+                this._itemContainer.appendChild(orderItem);
+                if (item['quantity']) {
+                    input.value = item['quantity'];
+                    this.calculatePrice(input, item.currentPrice);
+                }
+            });
+            this.calculateTotalPrice();
+            this.setAttribute('refreshstatus', 'refreshed');
         }
     }
 
-    sendToWhatsapp() {
-        const userDetails = this.getUserDetailsFormLocal();
-        const cartData = [
-            {
-                "itemName": "শ্যামের পাতি",
-                "amount": "80"
-            },
-            {
-                "itemName": "শ্যামের Z",
-                "amount": "70"
-            },
-            {
-                "itemName": "শ্যামের এঙ্গেল",
-                "amount": "90"
-            },
-        ];
-        let text = userDetails['name'] + '%0A' + userDetails['address'] + '%0A' + userDetails['mobile'] + '%0A%0A';
-        cartData.forEach(item => {
-            text = text + item['itemName'] + ' (' + item['amount'] + ')%0A';
+    saveInLocal(quantity, item) {
+        item['quantity'] = quantity;
+        localStorage.setItem('selectedItemsInCart', JSON.stringify(this._selectedItemsInCart));
+    }
+
+    getElement(name, className, innerText) {
+        const ele = document.createElement(name);
+        className && (ele.className = className);
+        innerText && (ele.innerText = innerText);
+        ele.appendChild
+        return ele;
+    }
+
+    calculatePrice(inputEle, currentPrice) {
+        const value = inputEle.value;
+        inputEle.nextSibling.innerText = '= Rs. ' + (value * currentPrice) + '/-';
+    }
+
+    calculateTotalPrice() {
+        let localData = localStorage.getItem('selectedItemsInCart');
+        if (localData) {
+            localData = JSON.parse(localData);
+            let totalAmount = 0;
+            localData.forEach(item => {
+                const quantity = item['quantity'];
+                if (quantity) {
+                    const currentPrice = item['currentPrice'];
+                    totalAmount = totalAmount + (quantity * currentPrice);
+                }
+            });
+            if (totalAmount > 0) {
+                this._cardFooter.classList.remove('d-none');
+                this._totalAmountEle.innerText = '= Rs. ' + totalAmount + '/-';
+            } else {
+                this._cardFooter.classList.add('d-none');
+            }
+        } else {
+            this._cardFooter.classList.add('d-none');
+        }
+    }
+
+    cancelSelectedItem(index) {
+        this._selectedItemsInCart.splice(index, 1);
+        if (this._selectedItemsInCart.length > 0) {
+            localStorage.setItem('selectedItemsInCart', JSON.stringify(this._selectedItemsInCart));
+        } else {
+            localStorage.removeItem('selectedItemsInCart');
+        }
+        this.render();
+        if (this._itemContainer.children.length === 0) {
+            this._itemContainer.innerHTML = '<p>হোম পেজে ব্যাক করে আইটেম সিলেক্ট করুন</p>';
+        }
+    }
+
+    isFormValid() {
+        let formValid = true;
+        const inputList = Array.from(this.getElementsByTagName('input'));
+        inputList.forEach(input => {
+            if (!input.value) {
+                input.classList.add('required-error-message');
+                input.placeholder = 'পরিমান লিখুন';
+                formValid = false;
+            }
         });
-        const a = document.createElement('a');
-        a.href = `https://wa.me/7980961274?text=${text}`;
-        document.body.appendChild(a);
-        a.click();
-        a.remove();
+        return formValid;
     }
 }
 

@@ -1,4 +1,7 @@
 class GroupContainer extends HTMLElement {
+    static get observedAttributes() {
+        return ['refreshstatus'];
+    }
     groupContainer;
     set groupData(value) {
         this._groupData = value;
@@ -13,11 +16,21 @@ class GroupContainer extends HTMLElement {
         this.innerHTML = `
         <div class="row">
             <div class="col group-container">
+                <div class="d-flex justify-content-center py-3">
+                    <div class="spinner-border text-primary" role="status">
+                    </div>
+                </div>
             </div>
         </div>
         `;
         this.groupContainer = this.getElementsByClassName('group-container')[0];
         this.dispatchEvent(new CustomEvent('initialized'));
+    }
+
+    attributeChangedCallback(name, oldValue, newValue) {
+        if (newValue === 'refresh') {
+            this.render();
+        }
     }
 
     render() {
@@ -32,14 +45,15 @@ class GroupContainer extends HTMLElement {
                 itemGroup.addEventListener('initialized', () => {
                     itemGroup.itemData = cardInfo;
                 });
-                itemGroup.addEventListener('itemClicked', (event) => {
-                    this.dispatchEvent(new CustomEvent('itemClicked', { detail: event.detail }));
+                itemGroup.addEventListener('itemClicked', () => {
+                    this.dispatchEvent(new CustomEvent('itemClicked'));
                 });
                 col.appendChild(itemGroup);
                 row.appendChild(col);
                 this.groupContainer.appendChild(row);
             });
         }
+        this.setAttribute('refreshstatus', 'refreshed');
     }
 }
 
