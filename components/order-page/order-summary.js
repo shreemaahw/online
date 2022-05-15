@@ -56,16 +56,18 @@ class OrderSummary extends HTMLElement {
                 });
                 const inputContainer = this.getElement('div', 'd-flex w-100');
                 const input = this.getElement('input', 'form-control border-right-0 w-50');
-                const subTotal = this.getElement('div', 'sub-total w-50 border-right border-bottom');
                 input.type = 'number';
                 input.placeholder = 'পরিমান';
-
                 input.addEventListener('input', (e) => {
                     this.calculatePrice(e.target, item.currentPrice);
                 });
                 input.addEventListener('blur', (e) => {
                     this.saveInLocal(e.target.value, item);
                     this.calculateTotalPrice();
+                });
+                const subTotal = this.getElement('div', 'sub-total w-50 border-right border-bottom');
+                subTotal.addEventListener('click', (e) => {
+                    e.target.previousSibling.focus();
                 });
                 inputLabel.appendChild(itemName);
                 inputLabel.appendChild(cancelIcon);
