@@ -85,6 +85,8 @@ class UserInfoCard extends HTMLElement {
             text = text + item['itemName'] + ' (' + item['itemId'] + ') ' + item['quantity'] + item['unit'] + '%0A';
         });
 
+        localStorage.removeItem('selectedItemsInCart');
+        
         const a = document.createElement('a');
         a.href = `https://wa.me/7980961274?text=${text}`;
         document.body.appendChild(a);
