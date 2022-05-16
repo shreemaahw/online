@@ -38,7 +38,18 @@ class UserInfoCard extends HTMLElement {
             const inputLabel = this.getElement('div', 'input-group-prepend');
             const inputText = this.getElement('span', 'input-group-text', input['label']);
             const inputTag = this.getElement('input', 'form-control');
-            inputTag.type = (input['info'] === 'mobile') ? 'number' : 'text';
+            if(input['info'] === 'mobile') {
+                inputTag.type = 'number';
+                inputTag.addEventListener('input', (e) => {
+                    const target = e.target;
+                    if (target.value.length > 10) {
+                        target.value = target.value.slice(0, 10);
+                    }
+                });
+            } else {
+                inputTag.type = 'text';
+                inputTag.maxLength = '30';
+            }
             inputTag.addEventListener('blur', (e) => {
                 this.saveUserInfoToLocal(e.target.value, input['info']);
             });
@@ -86,7 +97,7 @@ class UserInfoCard extends HTMLElement {
         });
 
         localStorage.removeItem('selectedItemsInCart');
-        
+
         const a = document.createElement('a');
         a.href = `https://wa.me/7980961274?text=${text}`;
         document.body.appendChild(a);

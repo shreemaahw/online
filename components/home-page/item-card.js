@@ -34,7 +34,7 @@ class ItemCard extends HTMLElement {
                 this.toggleItemToLocal();
                 this.dispatchEvent(new CustomEvent('itemClicked'));
             } else {
-                // this.getElementsByClassName('text-danger')[0].style.fontSize = '20px';
+                this.itemCardEle.classList.add('user-select-none');
             }
         });
     }

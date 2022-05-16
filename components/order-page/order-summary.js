@@ -61,13 +61,13 @@ class OrderSummary extends HTMLElement {
                 input.addEventListener('input', (e) => {
                     this.calculatePrice(e.target, item.currentPrice);
                 });
-                input.addEventListener('blur', (e) => {
-                    this.saveInLocal(e.target.value, item);
-                    this.calculateTotalPrice();
-                });
                 const subTotal = this.getElement('div', 'sub-total w-50 border-right border-bottom');
                 subTotal.addEventListener('click', (e) => {
                     e.target.previousSibling.focus();
+                });
+                input.addEventListener('blur', (e) => {
+                    this.saveInLocal(e.target.value, item);
+                    this.calculateTotalPrice();
                 });
                 inputLabel.appendChild(itemName);
                 inputLabel.appendChild(cancelIcon);
