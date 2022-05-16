@@ -38,7 +38,7 @@ class UserInfoCard extends HTMLElement {
             const inputLabel = this.getElement('div', 'input-group-prepend');
             const inputText = this.getElement('span', 'input-group-text', input['label']);
             const inputTag = this.getElement('input', 'form-control');
-            if(input['info'] === 'mobile') {
+            if (input['info'] === 'mobile') {
                 inputTag.type = 'number';
                 inputTag.addEventListener('input', (e) => {
                     const target = e.target;
@@ -49,6 +49,17 @@ class UserInfoCard extends HTMLElement {
             } else {
                 inputTag.type = 'text';
                 inputTag.maxLength = '30';
+                inputTag.addEventListener('input', (e) => {
+                    const target = e.target;
+                    const value = target.value;
+                    const lastChar = value.charAt(value.length - 1);
+                    if (!((lastChar.charCodeAt(0) > 96 && lastChar.charCodeAt(0) < 123) ||
+                        (lastChar.charCodeAt(0) > 64 && lastChar.charCodeAt(0) < 91) ||
+                        (lastChar.charCodeAt(0) === 32) ||
+                        (lastChar.charCodeAt(0) === 44))) {
+                        target.value = target.value.slice(0, -1);
+                    }
+                });
             }
             inputTag.addEventListener('blur', (e) => {
                 this.saveUserInfoToLocal(e.target.value, input['info']);
@@ -91,15 +102,15 @@ class UserInfoCard extends HTMLElement {
         let orderDetails = localStorage.getItem('selectedItemsInCart');
         orderDetails && (orderDetails = JSON.parse(orderDetails));
 
-        let text = userDetails['name'] + ' (' + userDetails['mobile'] + ') @' + userDetails['address'] + '%0A%0A';
+        let text = userDetails['name'] + ' (' + userDetails['mobile'] + ') ' + userDetails['address'] + '%0A%0A';
         orderDetails.forEach(item => {
-            text = text + item['itemName'] + ' (' + item['itemId'] + ') ' + item['quantity'] + item['unit'] + '%0A';
+            text = text + item['itemName'] + ' (' + item['itemId'] + ') ' + item['quantity'] + ' ' + item['unit'] + '%0A';
         });
 
         localStorage.removeItem('selectedItemsInCart');
 
         const a = document.createElement('a');
-        a.href = `https://wa.me/7980961274?text=${text}`;
+        a.href = `https://wa.me/9732838451?text=${text}`;
         document.body.appendChild(a);
         a.click();
         a.remove();
